@@ -8,15 +8,8 @@
 void SL_randLink(
   SL_link* const link,
   const uint32 len,
-  const uint32 min,
-  const uint32 max
-);
-
-void SL_randLink_bol(
-  SL_link* const link,
-  const uint32 len,
-  const uint32 min,
-  const uint32 max
+  const int32 min,
+  const int32 max
 );
 
 #endif // !__OTHER_H__

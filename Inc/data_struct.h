@@ -10,7 +10,8 @@
  *
  * 使用说明：
  * - 本头文件声明了单向链表模块的全部操作函数接口，具体实现详见 data_struct.c
- * - 当前链表节点存储的数据类型为 Elemtype（默认为 uint32），如需修改数据类型，请调整文件中的 typedef 定义
+ * - 当前链表节点存储的数据类型为 Elemtype（默认为
+ * uint32），如需修改数据类型，请调整文件中的 typedef 定义
  * - 所有函数接口均遵循模块化设计原则，参数与返回值定义清晰，详见对应函数声明
  *
  * 版本历史：
@@ -18,21 +19,18 @@
  */
 #pragma once
 #ifndef __DATA_STRUCT_H__
-#define __DATA_STRUCT_H__ 
+#define __DATA_STRUCT_H__
 
 /* include ---------------------------------------------------- */
 #include "main.h"
 
 /* define ----------------------------------------------------- */
 /**
- * @defgroup 单向链表模块
- * @brief 单向链表排序方式枚举
+ * @defgroup 枚举
+ * @brief 排序方式枚举
  * @{
  */
-enum sort {
-	ASC = 0x00,
-	DESC = 0x01
-}; 
+enum sort { ASC = 0x00, DESC = 0x01 };
 
 /**
  * @defgroup 单向链表模块
@@ -59,8 +57,8 @@ typedef struct SL_node SL_node;
  * 定义链表节点的结构，包含数据域和指向下一个节点的指针。
  */
 typedef struct SL_node {
-	Elemtype data;        ///< 节点数据
-	struct SL_node* next;    ///< 指向下一个节点的指针
+  Elemtype data;        ///< 节点数据
+  struct SL_node *next; ///< 指向下一个节点的指针
 } SL_node;
 
 /**
@@ -69,18 +67,16 @@ typedef struct SL_node {
  * 定义链表的结构，包含头节点指针、尾节点指针和链表长度。
  */
 typedef struct SL_linkedList {
-	SL_node* headIndex;      ///< 指向链表头节点的指针
-	SL_node* endIndex;       ///< 指向链表尾节点的指针
-	uint32 length;        ///< 链表长度（节点数量）
+  SL_node *headIndex; ///< 指向链表头节点的指针
+  SL_node *endIndex;  ///< 指向链表尾节点的指针
+  uint32 length;      ///< 链表长度（节点数量）
 } SL_link;
 
 /**
  * @brief 链表相关操作函数声明
  */
 
-SL_link* SL_inifLink (
-	void
-);
+SL_link *SL_inifLink(void);
 
 /** @} */ // 链表初始化操作
 
@@ -90,27 +86,14 @@ SL_link* SL_inifLink (
  * @{
  */
 
-void SL_insertHead (
-	SL_link* const linkedList,
-	const Elemtype inputData
-);
+void SL_insertHead(SL_link *const linkedList, const Elemtype inputData);
 
-void SL_add (
-	SL_link* const linkedList,
-	const Elemtype inputData
-);
+void SL_add(SL_link *const linkedList, const Elemtype inputData);
 
-void SL_extind(
-	SL_link* const linkedList,
-	const uint32 count,
-	...
-);
+void SL_extind(SL_link *const linkedList, const uint32 count, ...);
 
-void SL_insert (
-	SL_link* const linkedList,
-	const Elemtype inputData,
-	const uint32 index 
-);
+void SL_insert(SL_link *const linkedList, const Elemtype inputData,
+               const uint32 index);
 
 /** @} */ // 链表插入操作
 
@@ -120,30 +103,16 @@ void SL_insert (
  * @{
  */
 
-uint32 SL_count (
-	SL_link* const linkedList,
-	const Elemtype findData
-);
+uint32 SL_count(SL_link *const linkedList, const Elemtype findData);
 
-SL_node** SL_find (
-    SL_link* const linkedList,
-    const Elemtype findData,
-    uint32* outCount  
-);
+SL_node **SL_find(SL_link *const linkedList, const Elemtype findData,
+                  uint32 *outCount);
 
-uint32 SL_getIndex (
-	SL_link* const linkedList,
-	const Elemtype findData
-);
+uint32 SL_getIndex(SL_link *const linkedList, const Elemtype findData);
 
-void* SL_get_set(
-  SL_link* const linked
-);
+void *SL_get_set(SL_link *const linked);
 
-uint32 SL_josephusSurvivor (
-  SL_link* const link,
-  uint32 n
-);
+uint32 SL_josephusSurvivor(SL_link *const link, uint32 n);
 
 /** @} */ // 链表查找操作
 
@@ -153,14 +122,9 @@ uint32 SL_josephusSurvivor (
  * @{
  */
 
-void SL_sort (
-	SL_link* const linkedList,
-	enum sort const way
-);
+void SL_sort_Insertion(SL_link *const linkedList, enum sort way);
 
-uint16 SL_reverse (
-  SL_link* const linked
-);
+uint16 SL_reverse(SL_link *const linked);
 
 /** @} */ // 单向链表修改操作
 
@@ -170,29 +134,16 @@ uint16 SL_reverse (
  * @{
  */
 
-Elemtype SL_delHead(
-	SL_link* const linkedList
-);
+Elemtype SL_delHead(SL_link *const linkedList);
 
-Elemtype SL_delEnd(
-	SL_link* const linkedList
-);
+Elemtype SL_delEnd(SL_link *const linkedList);
 
-Elemtype SL_deleteNode (
-	SL_link* const linkedList, 
-	SL_node* const node
-);
+Elemtype SL_deleteNode(SL_link *const linkedList, SL_node *const node);
 
-Elemtype SL_deleteIndex(
-	SL_link* const linkedList, 
-	uint32 index
-);
+Elemtype SL_deleteIndex(SL_link *const linkedList, uint32 index);
 
-Elemtype SL_deleteData(
-    SL_link* const linkedList,
-    const Elemtype targetData,
-    uint32 deleteCount
-);
+Elemtype SL_deleteData(SL_link *const linkedList, const Elemtype targetData,
+                       uint32 deleteCount);
 
 /** @} */ // 链表删除操作
 
@@ -202,25 +153,19 @@ Elemtype SL_deleteData(
  * @{
  */
 
-uint32 SL_traverseLink (
-	SL_link* const linkedList
-);
+uint32 SL_traverseLink(SL_link *const linkedList);
 
 /** @} */ // 链表遍历操作
 
-/** 
+/**
  * @defgroup 单向链表释放操作
  * @brief 释放单向链表所占内存
  * @{
  */
 
-void SL_freeNodes(
-    SL_link* const linkedList
-);
+void SL_freeNodes(SL_link *const linkedList);
 
-void SL_freeLinks(
-    SL_link** linkedListPtr
-);
+void SL_freeLinks(SL_link *linkedListPtr);
 
 /** @} */ // 单向链表释放操作
 
@@ -230,21 +175,13 @@ void SL_freeLinks(
  * @{
  */
 
-SL_node* fast_slow_find(
-  SL_link* const linkedList,
-  const uint32 findIndex
-);
+SL_node *fast_slow_find(SL_link *const linkedList, const uint32 findIndex);
 
-SL_node* same_suffix (
-  SL_link* const link1,
-  SL_link* const link2,
-  uint32* const count 
-);
+SL_node *same_suffix(SL_link *const link1, SL_link *const link2,
+                     uint32 *const count);
 
 /**@} */ // 单向链表其它操作
 
 /** @} */ // 单向链表模块
 
-
- 
 #endif /* !__DATA_STRUCT_H__ */

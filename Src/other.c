@@ -4,21 +4,16 @@
 
 #include "other.h"
 
-
 /**
- * @brief 随机生成链表（正整数）
- * 
+ * @brief 随机生成链表
+ *
  * @param link 链表
  * @param len 链表长度
  * @param min 最小值
  * @param max 最大值
  */
-void SL_randLink(
-  SL_link* const link,
-  const uint32 len,
-  const uint32 min,
-  const uint32 max
-) {
+void SL_randLink(SL_link *const link, const uint32 len, const int32 min,
+                 const int32 max) {
   srand(time(NULL));
   uint32 randNum = 0;
   for (size_t i = 0; i < len; i++) {
@@ -27,31 +22,6 @@ void SL_randLink(
   }
 }
 
-/**
- * @brief 随机生成链表（整数）
- * 
- * @param link 链表
- * @param len 链表长度
- * @param min 最小值
- * @param max 最大值
- */
-void SL_randLink_bol(
-  SL_link* const link,
-  const uint32 len,
-  const uint32 min,
-  const uint32 max
-) {
-  srand(time(NULL));
-  Elemtype randNum = 0;
-  uint16 symbol = 0;
-
-  for (size_t i = 0; i < len; i++) {
-    randNum = RAND_INT(min, max);
-    symbol = RAND_INT(0, 1);
-    randNum = ((symbol == 1) ? randNum : -randNum);
-    SL_add(link, randNum);
-  }
-}
 
 /*
 n % (max- min + 1)
